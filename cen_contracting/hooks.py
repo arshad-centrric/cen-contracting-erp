@@ -44,9 +44,11 @@ app_license = "mit"
 
 # include js in doctype views
 doctype_js = {
-    "Sales Order": "public/js/sales_order.js",
-    "Quotation": "public/js/quotation.js",
-    "Lead": "public/js/lead.js"
+    "Sales Order": ["public/js/sales_order.js", "public/js/project_filters.js"],
+    "Quotation": ["public/js/quotation.js", "public/js/project_filters.js"],
+    "Lead": "public/js/lead.js",
+    "Opportunity": "public/js/project_filters.js",
+    "Project": "public/js/project.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -142,13 +144,17 @@ doctype_js = {
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Opportunity": {
+		"validate": "cen_contracting.overrides.opportunity.project_sync.sync_projects_on_validate"
+	},
+	"Quotation": {
+		"validate": "cen_contracting.overrides.opportunity.project_sync.sync_projects_on_validate"
+	},
+	"Sales Order": {
+		"validate": "cen_contracting.overrides.opportunity.project_sync.sync_projects_on_validate"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
