@@ -56,6 +56,8 @@ frappe.ui.form.on("Opportunity", {
         cen_contracting.apply_project_filters(frm);
     },
     refresh: function(frm) {
+        frm.set_df_property("contact_person", "reqd", 1);
+        frm.set_df_property("contact_mobile", "reqd", 1);
         cen_contracting.sync_from_standard(frm);
         
         if (!frm.doc.company) {
