@@ -28,6 +28,12 @@ def get_quotation_fields():
                 "label": "Payment Term",
                 "fieldtype": "Data",
                 "insert_after": "valid_till"
+            },
+            {
+                "fieldname": "cen_lpo_number",
+                "label": "Customer Reference / LPO No.",
+                "fieldtype": "Data",
+                "insert_after": "transaction_date"
             }
         ]
     }
