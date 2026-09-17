@@ -266,4 +266,7 @@ doc_events = {
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
-after_migrate = "cen_contracting.setup.custom_fields.create_custom_fields"
+after_migrate = [
+    "cen_contracting.setup.custom_fields.create_custom_fields",
+    "cen_contracting.setup.property_setter.quotation.set_quotation_properties"
+]
