@@ -6,6 +6,8 @@ from .quotation import get_quotation_fields
 from .sales_order import get_sales_order_fields
 from .sales_invoice import get_sales_invoice_fields
 from .customer import get_customer_fields
+from .project import get_project_fields
+from .expense_claim import get_expense_claim_fields
 
 def create_custom_fields():
     custom_fields = {}
@@ -15,5 +17,7 @@ def create_custom_fields():
     custom_fields.update(get_sales_order_fields())
     custom_fields.update(get_sales_invoice_fields())
     custom_fields.update(get_customer_fields())
+    custom_fields.update(get_project_fields())
+    custom_fields.update(get_expense_claim_fields())
     
     make_custom_fields(custom_fields)

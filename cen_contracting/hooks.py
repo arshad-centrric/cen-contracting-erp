@@ -48,7 +48,9 @@ doctype_js = {
     "Quotation": ["public/js/quotation.js", "public/js/project_filters.js"],
     "Lead": "public/js/lead.js",
     "Opportunity": "public/js/project_filters.js",
-    "Project": "public/js/project.js"
+    "Project": "public/js/project.js",
+    "Sales Invoice": "public/js/project_filters.js",
+    "Expense Claim": "public/js/expense_claim.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -268,5 +270,12 @@ doc_events = {
 
 after_migrate = [
     "cen_contracting.setup.custom_fields.create_custom_fields",
-    "cen_contracting.setup.property_setter.quotation.set_quotation_properties"
+    "cen_contracting.setup.property_setter.quotation.set_quotation_properties",
+    "cen_contracting.setup.property_setter.opportunity.set_opportunity_properties",
+    "cen_contracting.setup.property_setter.project.set_project_properties",
+    "cen_contracting.setup.supervisor_portal.setup_supervisor_role_and_workspace"
 ]
+
+override_doctype_class = {
+    "Expense Claim": "cen_contracting.overrides.petty_cash.expense_claim.CustomExpenseClaim"
+}
