@@ -151,7 +151,7 @@ doc_events = {
 		"validate": "cen_contracting.overrides.opportunity.project_sync.sync_projects_on_validate"
 	},
 	"Quotation": {
-		"before_insert": "cen_contracting.domain.sales_logic.increment_version_number",
+		"before_insert": "cen_contracting.overrides.quotation.version_control.increment_version_number",
 		"validate": "cen_contracting.overrides.opportunity.project_sync.sync_projects_on_validate"
 	},
 	"Sales Order": {
