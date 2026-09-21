@@ -156,6 +156,10 @@ doc_events = {
 	},
 	"Sales Order": {
 		"validate": "cen_contracting.overrides.opportunity.project_sync.sync_projects_on_validate"
+	},
+	"Purchase Invoice": {
+		"on_submit": "cen_contracting.overrides.purchase_invoice.purchase_invoice_overrides.sync_project_costing",
+		"on_cancel": "cen_contracting.overrides.purchase_invoice.purchase_invoice_overrides.sync_project_costing"
 	}
 }
 
