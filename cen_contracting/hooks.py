@@ -160,6 +160,9 @@ doc_events = {
 	"Purchase Invoice": {
 		"on_submit": "cen_contracting.overrides.purchase_invoice.purchase_invoice_overrides.sync_project_costing",
 		"on_cancel": "cen_contracting.overrides.purchase_invoice.purchase_invoice_overrides.sync_project_costing"
+	},
+	"Project": {
+		"on_update": "cen_contracting.overrides.project.supervisor_assignment.sync_project_supervisor_assignment"
 	}
 }
 
@@ -278,7 +281,9 @@ after_migrate = [
     "cen_contracting.setup.property_setter.quotation.set_quotation_properties",
     "cen_contracting.setup.property_setter.opportunity.set_opportunity_properties",
     "cen_contracting.setup.property_setter.project.set_project_properties",
-    "cen_contracting.setup.supervisor_portal.setup_supervisor_role_and_workspace"
+    "cen_contracting.setup.roles.supervisor.setup_supervisor_role_and_workspace",
+    "cen_contracting.setup.roles.accountant.setup_accountant_role",
+    "cen_contracting.setup.roles.admin.setup_admin_role"
 ]
 
 override_doctype_class = {

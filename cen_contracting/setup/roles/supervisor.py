@@ -1,8 +1,9 @@
 import frappe
+from frappe.desk.doctype.desktop_icon.desktop_icon import add_workspace_to_desktop
 
 def setup_supervisor_role_and_workspace():
     role_name = "Project Supervisor"
-    
+
     # 1. Create Role
     if not frappe.db.exists("Role", role_name):
         frappe.get_doc({
@@ -10,7 +11,7 @@ def setup_supervisor_role_and_workspace():
             "role_name": role_name,
             "desk_access": 1
         }).insert(ignore_permissions=True)
-        
+
     # 2. Assign Permissions
     perms = [
         {"parent": "Project", "read": 1, "write": 1, "create": 1},
@@ -20,22 +21,23 @@ def setup_supervisor_role_and_workspace():
         {"parent": "Employee", "read": 1},
         {"parent": "Customer", "read": 1},
     ]
-    
+
     for p in perms:
-        if not frappe.db.exists("Custom DocPerm", {"parent": p["parent"], "role": role_name}):
-            docperm = frappe.new_doc("Custom DocPerm")
-            docperm.parent = p["parent"]
-            docperm.role = role_name
-            docperm.read = p.get("read", 0)
-            docperm.write = p.get("write", 0)
-            docperm.create = p.get("create", 0)
-            docperm.submit = p.get("submit", 0)
-            docperm.insert(ignore_permissions=True)
-            
+        existing = frappe.db.exists("Custom DocPerm", {"parent": p["parent"], "role": role_name})
+        docperm = frappe.get_doc("Custom DocPerm", existing) if existing else frappe.new_doc("Custom DocPerm")
+        docperm.parent = p["parent"]
+        docperm.role = role_name
+        docperm.read = p.get("read", 0)
+        docperm.write = p.get("write", 0)
+        docperm.create = p.get("create", 0)
+        docperm.submit = p.get("submit", 0)
+        docperm.report = p.get("report", 0)
+        docperm.save(ignore_permissions=True) if existing else docperm.insert(ignore_permissions=True)
+
     # Update perms (Clear cache so new permissions take effect immediately)
     for p in perms:
         frappe.clear_cache(doctype=p["parent"])
-        
+
     # 3. Create Workspace
     workspace_name = "Supervisor Desk"
     if not frappe.db.exists("Workspace", workspace_name):
@@ -56,3 +58,8 @@ def setup_supervisor_role_and_workspace():
                 {"type": "DocType", "link_to": "Expense Claim", "label": "Claim Petty Cash", "icon": "credit-card"}
             ]
         }).insert(ignore_permissions=True)
+
+    # 4. Pin the workspace to the Home/Desktop screen (creates its Workspace Sidebar +
+    # Desktop Icon) so a user with only this role sees it immediately after login.
+    # Same call the desk UI itself makes to do this; idempotent (no-ops if both already exist).
+    add_workspace_to_desktop(workspace_name)
