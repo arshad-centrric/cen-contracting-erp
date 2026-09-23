@@ -101,7 +101,7 @@ def setup_accountant_role():
     # Note: Report.save() refuses to run on standard reports outside developer mode
     # (or bench migrate), so we insert directly into the "Has Role" child table instead
     # of loading and saving the parent Report document.
-    restricted_reports = ["Sales Register", "Sales Analytics", "Accounts Receivable", "General Ledger", "Project Profitability", "Customer Lifecycle Billing"]
+    restricted_reports = ["Sales Register", "Sales Analytics", "Accounts Receivable", "General Ledger", "Project Profitability"]
     for report_name in restricted_reports:
         if not frappe.db.exists("Report", report_name):
             continue
@@ -142,7 +142,6 @@ def setup_accountant_role():
             {"label": "Project Profitability", "type": "Report", "link_to": "Project Profitability", "icon": "table"},
             {"label": "Salary Advance Report", "type": "Report", "link_to": "Salary Advance Report", "icon": "table"},
             {"label": "Loan Report", "type": "Report", "link_to": "Loan Report", "icon": "table"},
-            {"label": "Customer Lifecycle Billing", "type": "Report", "link_to": "Customer Lifecycle Billing", "icon": "table"},
         ]),
     ]
 

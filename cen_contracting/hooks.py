@@ -50,7 +50,8 @@ doctype_js = {
     "Opportunity": "public/js/project_filters.js",
     "Project": "public/js/project.js",
     "Sales Invoice": "public/js/project_filters.js",
-    "Expense Claim": "public/js/expense_claim.js"
+    "Expense Claim": "public/js/expense_claim.js",
+    "Employee Advance": "public/js/employee_advance.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -163,6 +164,10 @@ doc_events = {
 	},
 	"Project": {
 		"on_update": "cen_contracting.overrides.project.supervisor_assignment.sync_project_supervisor_assignment"
+	},
+	"Employee Advance": {
+		"validate": "cen_contracting.overrides.employee_advance.advance_type_mapping.validate",
+		"on_change": "cen_contracting.overrides.employee_advance.auto_recovery.on_change"
 	}
 }
 
@@ -283,7 +288,8 @@ after_migrate = [
     "cen_contracting.setup.property_setter.project.set_project_properties",
     "cen_contracting.setup.roles.supervisor.setup_supervisor_role_and_workspace",
     "cen_contracting.setup.roles.accountant.setup_accountant_role",
-    "cen_contracting.setup.roles.admin.setup_admin_role"
+    "cen_contracting.setup.roles.admin.setup_admin_role",
+    "cen_contracting.setup.property_setter.employee_advance.set_employee_advance_properties"
 ]
 
 override_doctype_class = {
