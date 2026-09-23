@@ -4,6 +4,9 @@
 This app utilizes a strictly decoupled, **DocType-centric directory structure**. This prevents merge conflicts, ensures domain logic is isolated, and makes finding code intuitive.
 
 * **`cen_contracting/setup/`**: Contains Python-based database schema updates (custom fields) and installation scripts.
+  * **`setup/roles/`**: Contains one file per custom Role (Role creation + its Custom DocPerm rules).
+  * **Structure:** `setup/roles/[role_name].py`
+  * **Example:** `setup/roles/accountant.py`
 * **`cen_contracting/public/js/`**: Contains all Client-Side UI scripts named after their respective DocTypes.
 * **`cen_contracting/overrides/`**: The core directory for all backend business logic.
   * **Structure:** `overrides/[doctype_name]/[feature_name].py`
@@ -22,6 +25,9 @@ This app utilizes a strictly decoupled, **DocType-centric directory structure**.
 
 4. **ADDING NEW LOGIC:** 
    When developing a new feature for a specific document, create a descriptive Python file inside that document's folder in `overrides/` (e.g., `overrides/sales_invoice/retention_reminder.py`). Map any document hooks (like `on_submit` or `validate`) in `hooks.py` pointing specifically to these functions.
+
+5. **CUSTOM ROLES:** 
+   Do not create Roles or their permissions via fixtures or manually through the UI. Every custom Role must be defined programmatically inside `cen_contracting/setup/roles/[role_name].py` as a function that creates the Role and its Custom DocPerm rules, and mapped to `after_migrate` in `hooks.py` (e.g., `setup/roles/accountant.py`).
 
 Important note : Instead of folder name : custom_logic use the name : overrides. 
 
