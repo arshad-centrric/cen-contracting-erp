@@ -148,6 +148,9 @@ doctype_js = {
 # Hook on document methods and events
 
 doc_events = {
+	"*": {
+		"before_insert": "cen_contracting.overrides.all_doctypes.letter_head_routing.set_dynamic_letter_head"
+	},
 	"Opportunity": {
 		"validate": "cen_contracting.overrides.opportunity.project_sync.sync_projects_on_validate"
 	},
