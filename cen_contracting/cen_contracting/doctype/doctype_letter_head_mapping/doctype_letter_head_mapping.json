@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-24 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "document_type",
+  "default_letter_head"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "link_filters": "[[\"DocType\", \"istable\", \"=\", 0], [\"DocType\", \"issingle\", \"=\", 0]]",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_letter_head",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Letter Head",
+   "link_filters": "[[\"Letter Head\", \"disabled\", \"=\", 0]]",
+   "options": "Letter Head",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cen Contracting",
+ "name": "DocType Letter Head Mapping",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
