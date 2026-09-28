@@ -204,9 +204,9 @@ doc_events = {
 # ------------------------------
 #
 # Specify custom mixins to extend the standard doctype controller.
-# extend_doctype_class = {
-# 	"Task": "cen_contracting.custom.task.CustomTaskMixin"
-# }
+extend_doctype_class = {
+	"Sales Order": "cen_contracting.overrides.sales_order.optional_delivery_date.OptionalDeliveryDateMixin"
+}
 
 # Overriding Methods
 # ------------------------------
@@ -292,7 +292,9 @@ after_migrate = [
     "cen_contracting.setup.roles.supervisor.setup_supervisor_role_and_workspace",
     "cen_contracting.setup.roles.accountant.setup_accountant_role",
     "cen_contracting.setup.roles.admin.setup_admin_role",
-    "cen_contracting.setup.property_setter.employee_advance.set_employee_advance_properties"
+    "cen_contracting.setup.property_setter.employee_advance.set_employee_advance_properties",
+    "cen_contracting.setup.property_setter.sales_order.set_sales_order_properties",
+    "cen_contracting.setup.property_setter.sales_invoice.set_sales_invoice_properties"
 ]
 
 override_doctype_class = {
