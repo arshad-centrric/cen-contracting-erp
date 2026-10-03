@@ -1,5 +1,7 @@
 import frappe
 
+PRIVILEGED_ROLES = {"Classy Admin", "Classy Accountant", "Project Supervisor"}
+
 
 def execute(filters=None):
     filters = filters or {}
@@ -26,9 +28,17 @@ def get_conditions(filters):
     conditions = ["cen_advance_type = 'Salary Advance'", "company = %(company)s"]
     values = {"company": filters.get("company")}
 
-    if filters.get("employee"):
+    if PRIVILEGED_ROLES & set(frappe.get_roles()):
+        if filters.get("employee"):
+            conditions.append("employee = %(employee)s")
+            values["employee"] = filters.get("employee")
+    else:
+        # Plain Employee: force-restrict to their own linked Employee, ignoring any
+        # employee filter value sent in the request. No linked Employee -> sentinel
+        # value guarantees zero rows rather than throwing.
+        own_employee = frappe.db.get_value("Employee", {"user_id": frappe.session.user}, "name")
         conditions.append("employee = %(employee)s")
-        values["employee"] = filters.get("employee")
+        values["employee"] = own_employee or "__no_linked_employee__"
 
     if filters.get("from_date"):
         conditions.append("posting_date >= %(from_date)s")
