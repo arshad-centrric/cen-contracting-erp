@@ -11,6 +11,9 @@ This app utilizes a strictly decoupled, **DocType-centric directory structure**.
 * **`cen_contracting/overrides/`**: The core directory for all backend business logic.
   * **Structure:** `overrides/[doctype_name]/[feature_name].py`
   * **Example:** `overrides/quotation/pricing_logic.py`
+* **`cen_contracting/docs/doctypes/`**: Markdown documentation of every customization, one file per DocType.
+  * **Structure:** `docs/doctypes/[doctype_name].md`
+  * **Example:** `docs/doctypes/sales_order.md`
 
 ## Strict Development Rules
 
@@ -28,6 +31,9 @@ This app utilizes a strictly decoupled, **DocType-centric directory structure**.
 
 5. **CUSTOM ROLES:** 
    Do not create Roles or their permissions via fixtures or manually through the UI. Every custom Role must be defined programmatically inside `cen_contracting/setup/roles/[role_name].py` as a function that creates the Role and its Custom DocPerm rules, and mapped to `after_migrate` in `hooks.py` (e.g., `setup/roles/accountant.py`).
+
+6. **DOCUMENT EVERY CHANGE:** 
+   Every change made in this app (custom fields, property setters, overrides, client scripts, roles, new DocTypes) must be documented in the affected DocType's file inside `cen_contracting/docs/doctypes/[doctype_name].md` as part of the same change. Add a new numbered section (e.g. `## 3. Optional Delivery Date`) describing what was changed and why, and name the files and hooks involved (e.g. `overrides/sales_order/optional_delivery_date.py`). If the DocType has no file yet, create one titled `# [DocType] - Customizations & Logic`. This lets any developer see every customization of a document in one place.
 
 Important note : Instead of folder name : custom_logic use the name : overrides. 
 

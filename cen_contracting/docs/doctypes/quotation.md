@@ -15,3 +15,7 @@
 ## 3. Revision History & Version Control
 * **Auto-Incrementing Versions:** A Python hook (`before_insert` in `overrides/quotation/version_control.py`) checks if a quotation is being amended. If true, it automatically fetches the `cen_version_number` of the cancelled quote and increments it by 1 on the new draft.
 * **Custom UI Revision Flow:** A client script (`public/js/quotation.js`) intercepts the standard amendment flow on cancelled quotations. It replaces the native "Amend" button with a "Revise Quotation" dialog, requiring the user to log a reason before automatically passing it to the new draft.
+
+## 4. Items Table Layout
+* **Description & UOM Always Visible:** `description` and `uom` are shown as columns in the items table (`in_list_view`) via Property Setters in `setup/property_setter/quotation.py`.
+* **Column Widths:** Item Code 2, Description 3, Qty 1, UOM 1, Rate 1, Amount 2 (the grid holds 10 units; Frappe widens columns automatically when space is free).
