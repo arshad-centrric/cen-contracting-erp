@@ -55,7 +55,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": null,
- "modified": "2026-09-23 13:35:57.775659",
+ "modified": "2026-10-03 14:28:19.592254",
  "modified_by": "Administrator",
  "module": "Cen Contracting",
  "name": "Loan Report",
@@ -74,6 +74,9 @@
   },
   {
    "role": "Project Supervisor"
+  },
+  {
+   "role": "Employee"
   }
  ],
  "timeout": 0
